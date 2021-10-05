@@ -1,5 +1,0 @@
-firebase:
-  config:
-    path: ${FIREBASE_JSON}
-  database:
-    url: ${FIREBASE_DATA_URL}

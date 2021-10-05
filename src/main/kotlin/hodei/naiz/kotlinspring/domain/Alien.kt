@@ -14,8 +14,8 @@ import javax.persistence.Id
  */
 @Entity
 data class Alien (
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long=0,
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    val id: Long,
     val name:String,
     val planet:String?
 

@@ -18,18 +18,17 @@ import java.io.FileInputStream
  * Copyright: MIT
  */
 @Configuration
-class AppConf(
-    @Value("firebase.config.path")
-    val firebaseConfigPath:GoogleCredentials,
-    @Value("firebase.database.url")
-    val firebaseDatabaseUrl:String
-) {
+class AppConf{
+    @Value("\${firebase.config.path}")
+    lateinit var firebaseConfigPath:String
+    @Value("\${firebase.database.url}")
+    lateinit var firebaseDatabaseUrl:String
 
 
     @Bean
     fun initFirebase(): DatabaseReference {
         val options =FirebaseOptions.builder()
-            .setCredentials(firebaseConfigPath)
+            .setCredentials(GoogleCredentials.fromStream(FileInputStream(firebaseConfigPath)))
             .setDatabaseUrl(firebaseDatabaseUrl)
             .build()
         FirebaseApp.initializeApp(options)
