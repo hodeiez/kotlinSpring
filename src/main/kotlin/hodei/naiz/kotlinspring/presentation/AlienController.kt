@@ -17,10 +17,10 @@ import java.util.*
  */
 @RestController
 @RequestMapping("aliens")
-class AlienController(val alienRepo: AlienRepo, val databaseReference: DatabaseReference) {
+class AlienController(val alienRepo: AlienRepo) {
     @PostMapping
-    fun createAlien(@RequestBody alien: Alien): ApiFuture<Void> =
-        databaseReference.child(UUID.randomUUID().toString()).setValueAsync(alien)
+    fun createAlien(@RequestBody alien: Alien) =
+        println("empty")
     @GetMapping
     fun getAliens(): List<Alien> =alienRepo.findAll()
 }
