@@ -1,6 +1,8 @@
 package hodei.naiz.kotlinspring.persistance
 
 import hodei.naiz.kotlinspring.domain.Alien
+import hodei.naiz.kotlinspring.persistance.firestore.FirestoreRepo
+import hodei.naiz.kotlinspring.persistance.firestore.IRepo
 import org.springframework.data.jpa.repository.JpaRepository
 
 /**
@@ -10,5 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository
  * Project: kotlinSpring
  * Copyright: MIT
  */
-interface AlienRepo : JpaRepository<Alien,Long> {
+interface AlienRepo : IRepo<Alien>{
+
 }
