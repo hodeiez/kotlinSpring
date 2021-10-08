@@ -33,6 +33,8 @@ class AlienController(val alienRepo:IRepo<Alien>) {
     @GetMapping
     fun getById(@RequestBody id:String): Either<String, Alien> = alienRepo.getById(id)
 
+    @GetMapping("all")
+    fun getAll():Either<String,List<String>> = alienRepo.getAll()
 
 }
 

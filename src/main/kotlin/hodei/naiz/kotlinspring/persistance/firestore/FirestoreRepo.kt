@@ -32,4 +32,12 @@ class FirestoreRepo <T>(var collection : CollectionReference, var classType: Cla
            Either.Left(e.message.toString())
        }
     }
+
+    override fun getAll(): Either<String, List<String>> {
+       return try{
+           Either.Right(collection.get().get().documents.map{a->a.data.toString()})
+       }
+       catch(e:Exception){
+       Either.Left("Couldn't fetch")}
+    }
 }

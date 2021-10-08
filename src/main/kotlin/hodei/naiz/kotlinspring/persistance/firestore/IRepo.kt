@@ -12,5 +12,6 @@ interface IRepo <T>{
 
     fun add(data: T): Either<String,String>
     fun getById(id:String): Either<String,T>
+    fun getAll():Either<String,List<String>>
 }
 
