@@ -10,8 +10,8 @@ package hodei.naiz.kotlinspring.persistance.firestore
 
 interface IRepo <T>{
 
-    fun add(data: T): Either<String,String>
+    fun add(data: T): Either<String, T>
     fun getById(id:String): Either<String,T>
-    fun getAll():Either<String,List<String>>
+    fun getAll(): Either<String, List<T>>
 }
 

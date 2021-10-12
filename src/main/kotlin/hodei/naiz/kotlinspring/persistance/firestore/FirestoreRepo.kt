@@ -10,22 +10,24 @@ import com.google.cloud.firestore.Firestore
  * Project: kotlinSpring
  * Copyright: MIT
  */
-class FirestoreRepo <T>(var collection : CollectionReference, var classType: Class<T>) :IRepo<T>  {
+ class FirestoreRepo <T>(var collection : CollectionReference, var classType: Class<T>) :IRepo<T>  {
 
 
-    override fun add(data: T): Either<String, String> {
+    override fun add(data: T): Either<String, T> {
         return try{
             val futureResult =collection.add(data)
             val result=futureResult.get()
-            Either.Right(result.id)
+            Either.Right(collection.document(result.id).get().get().toObject(classType))
         } catch(e:Exception){
             Either.Left(e.message.toString())
         }
     }
-//TODO: check if any paramater makes sense
+
     override fun getById(id: String): Either<String, T> {
        return try {
            val entry = collection.document(id).get().get()
+
+
            if (entry.exists()) Either.Right(entry.toObject(classType)) else Either.Left("$id not found")
        }
        catch(e:Exception){
@@ -33,11 +35,11 @@ class FirestoreRepo <T>(var collection : CollectionReference, var classType: Cla
        }
     }
 
-    override fun getAll(): Either<String, List<String>> {
+    override fun getAll(): Either<String, List<T>> {
        return try{
-           Either.Right(collection.get().get().documents.map{a->a.data.toString()})
+           Either.Right(collection.get().get().documents.map{a->a.toObject(classType)})
        }
        catch(e:Exception){
-       Either.Left("Couldn't fetch")}
+       Either.Left("Couldn't fetch: "+e.message)}
     }
 }

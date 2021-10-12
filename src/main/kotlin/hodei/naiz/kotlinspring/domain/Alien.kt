@@ -1,9 +1,7 @@
 package hodei.naiz.kotlinspring.domain
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import com.google.cloud.firestore.annotation.DocumentId
+
 
 /**
  * Created by Hodei Eceiza
@@ -12,11 +10,11 @@ import javax.persistence.Id
  * Project: kotlinSpring
  * Copyright: MIT
  */
-@Entity
+
 data class Alien (
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long,
-    val name:String,
-    val planet:String?
+    @DocumentId
+    val id: String?="",
+    val name:String?="",
+    val planet:String?=""
 
 )

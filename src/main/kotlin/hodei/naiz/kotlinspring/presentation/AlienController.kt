@@ -11,6 +11,7 @@ import hodei.naiz.kotlinspring.persistance.firestore.FirestoreRepo
 import hodei.naiz.kotlinspring.persistance.firestore.FirestoreRepoFactory
 import hodei.naiz.kotlinspring.persistance.firestore.IRepo
 import org.springframework.context.annotation.Bean
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -25,16 +26,15 @@ import java.util.*
 @RequestMapping("aliens")
 class AlienController(val alienRepo:IRepo<Alien>) {
     @PostMapping
-    fun createAlien(@RequestBody alien: Alien): Either<String, String> =
-      alienRepo.add(alien)
+    fun createAlien(@RequestBody alien: Alien): Any? =
+      alienRepo.add(alien).result()
 
-       // println(alien):
 
-    @GetMapping
-    fun getById(@RequestBody id:String): Either<String, Alien> = alienRepo.getById(id)
+    @GetMapping("{id}")
+    fun getById(@PathVariable id:String): Either<String, Alien> = alienRepo.getById(id)
 
     @GetMapping("all")
-    fun getAll():Either<String,List<String>> = alienRepo.getAll()
+    fun getAll():Either<String,List<Alien>> = alienRepo.getAll()
 
 }
 
